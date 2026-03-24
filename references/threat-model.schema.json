@@ -1,0 +1,215 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Randori PASTA Threat Model",
+  "description": "Schema for PASTA threat model output produced by Randori stages",
+  "type": "object",
+  "required": ["schema_version", "run_id", "target", "generated_at", "stages_completed", "summary"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "type": "string"
+    },
+    "target": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "stages_completed": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": ["s1", "s2", "s3", "s4", "s5", "s6", "s7"]
+      }
+    },
+    "scope": {
+      "type": "object",
+      "properties": {
+        "languages": { "type": "array", "items": { "type": "string" } },
+        "frameworks": { "type": "array", "items": { "type": "string" } },
+        "source_file_count": { "type": "integer" }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "required": ["total_threats", "critical", "high", "medium", "low"],
+      "properties": {
+        "total_threats": { "type": "integer" },
+        "critical": { "type": "integer" },
+        "high": { "type": "integer" },
+        "medium": { "type": "integer" },
+        "low": { "type": "integer" },
+        "components_identified": { "type": "integer" },
+        "trust_boundaries": { "type": "integer" },
+        "entry_points": { "type": "integer" },
+        "attack_trees": { "type": "integer" },
+        "stride_breakdown": {
+          "type": "object",
+          "properties": {
+            "spoofing": { "type": "integer" },
+            "tampering": { "type": "integer" },
+            "repudiation": { "type": "integer" },
+            "information_disclosure": { "type": "integer" },
+            "denial_of_service": { "type": "integer" },
+            "elevation_of_privilege": { "type": "integer" }
+          }
+        }
+      }
+    },
+    "stages": {
+      "type": "object",
+      "properties": {
+        "s1_objectives": { "$ref": "#/$defs/stage_output" },
+        "s2_scope": { "$ref": "#/$defs/stage_output" },
+        "s3_decomposition": { "$ref": "#/$defs/stage_output" },
+        "s4_threats": { "$ref": "#/$defs/stage_output" }
+      }
+    },
+    "threat_scenarios": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "stride_category", "impact"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "description": { "type": "string" },
+          "stride_category": {
+            "type": "string",
+            "enum": ["spoofing", "tampering", "repudiation", "information-disclosure", "denial-of-service", "elevation-of-privilege"]
+          },
+          "attack_technique_id": {
+            "type": "string",
+            "description": "MITRE ATT&CK technique ID (e.g., T1190)"
+          },
+          "capec_id": {
+            "type": "string",
+            "description": "CAPEC pattern ID (e.g., CAPEC-66)"
+          },
+          "owasp_category": {
+            "type": "string",
+            "description": "OWASP Top 10 category (e.g., A03)"
+          },
+          "target_assets": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "threat_agent": { "type": "string" },
+          "probability": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          },
+          "impact": {
+            "type": "string",
+            "enum": ["critical", "high", "medium", "low"]
+          },
+          "probabilistic_factors": {
+            "type": "object",
+            "properties": {
+              "access": { "type": "number", "minimum": 0, "maximum": 1 },
+              "window_of_opportunity": { "type": "number", "minimum": 0, "maximum": 1 },
+              "ability_to_repudiate": { "type": "number", "minimum": 0, "maximum": 1 },
+              "risk_reward": { "type": "number", "minimum": 0, "maximum": 1 },
+              "threat_simplicity": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          },
+          "evidence_anchors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["file_path", "start_line", "description"],
+              "properties": {
+                "file_path": { "type": "string" },
+                "start_line": { "type": "integer" },
+                "description": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "dfd": {
+      "type": "object",
+      "properties": {
+        "elements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "type", "name"],
+            "properties": {
+              "id": { "type": "string" },
+              "type": { "type": "string", "enum": ["external-entity", "process", "data-store", "data-flow"] },
+              "name": { "type": "string" },
+              "trust_zone": { "type": "string" },
+              "source": { "type": "string" },
+              "target": { "type": "string" },
+              "protocol": { "type": "string" },
+              "data_classification": { "type": "string" }
+            }
+          }
+        },
+        "trust_boundaries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "inner_zone", "outer_zone"],
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "inner_zone": { "type": "string" },
+              "outer_zone": { "type": "string" },
+              "crossing_flows": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        }
+      }
+    },
+    "attack_trees": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["goal", "overall_risk"],
+        "properties": {
+          "goal": { "type": "string" },
+          "overall_risk": { "type": "string", "enum": ["critical", "high", "medium", "low"] },
+          "root_node": { "$ref": "#/$defs/attack_tree_node" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "stage_output": {
+      "type": "object",
+      "properties": {
+        "completed_at": { "type": "string", "format": "date-time" },
+        "data": { "type": "object" }
+      }
+    },
+    "attack_tree_node": {
+      "type": "object",
+      "required": ["id", "description", "type"],
+      "properties": {
+        "id": { "type": "string" },
+        "description": { "type": "string" },
+        "type": { "type": "string", "enum": ["AND", "OR", "LEAF"] },
+        "probability": { "type": "number", "minimum": 0, "maximum": 1 },
+        "impact": { "type": "string" },
+        "technique": { "type": "string" },
+        "capec_id": { "type": "string" },
+        "node_role": {
+          "type": "string",
+          "enum": ["threat-motive", "threat-agent", "target", "attack-vector", "attack-pattern", "vulnerability", "exploit"]
+        },
+        "children": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/attack_tree_node" }
+        }
+      }
+    }
+  }
+}

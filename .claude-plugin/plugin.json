@@ -1,0 +1,23 @@
+{
+  "name": "randori",
+  "version": "1.0.0",
+  "description": "AI-powered PASTA threat modeling plugin for Claude Code. Walks through the 7-stage Process for Attack Simulation and Threat Analysis with STRIDE classification, MITRE ATT&CK mapping, DFD generation, and evidence-anchored threat scenarios.",
+  "author": {
+    "name": "allsmog",
+    "url": "https://github.com/allsmog/randori-plugin"
+  },
+  "license": "MIT",
+  "keywords": [
+    "threat-modeling",
+    "PASTA",
+    "STRIDE",
+    "MITRE",
+    "ATT&CK",
+    "CAPEC",
+    "DFD",
+    "attack-tree",
+    "security",
+    "OWASP",
+    "risk-assessment"
+  ]
+}

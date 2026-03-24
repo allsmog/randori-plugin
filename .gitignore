@@ -1,0 +1,28 @@
+# OS
+.DS_Store
+Thumbs.db
+
+# Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Claude Code session state (generated per-project, not part of the plugin)
+.claude/randori-state.json
+.claude/threat-model.md
+.claude/dfd.mmd
+.claude/attack-trees.mmd
+.claude/pasta-s1.json
+.claude/pasta-s2.json
+.claude/pasta-s3.json
+.claude/pasta-s4.json
+.claude/pasta-s5.json
+.claude/pasta-s6.json
+.claude/pasta-s7.json
+.claude/randori.local.md
+
+# Environment
+.env
+.env.*
