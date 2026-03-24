@@ -192,4 +192,4 @@ If no code evidence exists (e.g., architectural threat), describe the architectu
 | Insider | Data theft | High | User database, admin panel |
 ```
 
-Save output to `.claude/pasta-s4.json` for downstream stages.
+**You MUST use the Write tool to save the above structured output to `.claude/pasta-s4.json` before this stage is considered complete.** This file is the core threat analysis output and is required for resume support and report generation.

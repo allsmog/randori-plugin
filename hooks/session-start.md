@@ -13,7 +13,7 @@ On session start, check for existing threat model state and provide context.
 Check for existing threat model state:
 
 ```bash
-ls .claude/randori-state.json .claude/threat-model.md .claude/dfd.mmd 2>/dev/null
+ls .claude/randori-state.json .claude/threat-model.md .claude/dfd.mmd 2>/dev/null || true
 ```
 
 ### If state file exists:

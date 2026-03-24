@@ -24,7 +24,7 @@ Generate a consolidated threat model report from completed PASTA stages.
 Read all available stage outputs:
 
 ```bash
-ls .claude/pasta-s1.json .claude/pasta-s2.json .claude/pasta-s3.json .claude/pasta-s4.json .claude/pasta-s5.json .claude/pasta-s6.json .claude/pasta-s7.json 2>/dev/null
+ls .claude/pasta-s1.json .claude/pasta-s2.json .claude/pasta-s3.json .claude/pasta-s4.json .claude/pasta-s5.json .claude/pasta-s6.json .claude/pasta-s7.json 2>/dev/null || true
 ```
 
 If no stage outputs exist, suggest running `/randori:pasta` first.

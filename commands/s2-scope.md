@@ -33,10 +33,10 @@ cat Cargo.toml 2>/dev/null | head -30
 cat pom.xml 2>/dev/null | head -50
 
 # Docker services
-cat docker-compose.yml docker-compose.yaml 2>/dev/null
+cat docker-compose.yml docker-compose.yaml 2>/dev/null || true
 
 # Infrastructure
-ls terraform/ k8s/ helm/ cloudformation/ 2>/dev/null
+ls terraform/ k8s/ helm/ cloudformation/ 2>/dev/null || true
 ```
 
 For each component, classify:
@@ -93,9 +93,9 @@ grep -rniE "(console\.log|logger|log\.(info|error|warn))" --include="*.ts" --inc
 
 ```bash
 # Runtime environment
-ls Dockerfile .dockerignore 2>/dev/null
-ls .github/workflows/*.yml .gitlab-ci.yml Jenkinsfile 2>/dev/null
-cat .nvmrc .python-version .tool-versions 2>/dev/null
+ls Dockerfile .dockerignore 2>/dev/null || true
+ls .github/workflows/*.yml .gitlab-ci.yml Jenkinsfile 2>/dev/null || true
+cat .nvmrc .python-version .tool-versions 2>/dev/null || true
 ```
 
 ### Step 5: Determine scope exclusions
@@ -146,4 +146,4 @@ Identify what's explicitly OUT of scope:
 - Third-party SaaS (Stripe, SendGrid)
 ```
 
-Save output to `.claude/pasta-s2.json` for downstream stages.
+**You MUST use the Write tool to save the above structured output to `.claude/pasta-s2.json` before this stage is considered complete.** This file is required by downstream stages and for resume support.

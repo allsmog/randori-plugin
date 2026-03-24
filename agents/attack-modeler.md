@@ -78,7 +78,7 @@ Enumerate the complete attack surface:
 grep -rniE "(app\.(get|post|put|patch|delete)|router\.(get|post|put|patch|delete)|@(Get|Post|Put|Delete))" --include="*.ts" --include="*.js" --include="*.py" --include="*.go" --include="*.java"
 
 # Configuration surface
-ls .env .env.* *.config.js *.config.ts settings.py config/ 2>/dev/null
+ls .env .env.* *.config.js *.config.ts settings.py config/ 2>/dev/null || true
 
 # Exposed services (Docker/K8s)
 grep -rniE "(ports:|expose:|EXPOSE|nodePort|hostPort)" --include="*.yml" --include="*.yaml" --include="Dockerfile"

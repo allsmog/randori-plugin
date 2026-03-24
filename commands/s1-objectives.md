@@ -21,7 +21,7 @@ Gather business context, security requirements, and compliance landscape to fram
 Read project documentation to understand what the application does:
 
 ```bash
-ls README.md CONTRIBUTING.md docs/ .github/ LICENSE 2>/dev/null
+ls README.md CONTRIBUTING.md docs/ .github/ LICENSE 2>/dev/null || true
 ```
 
 Read the README and any architecture docs. Identify:
@@ -62,7 +62,7 @@ Check for compliance indicators:
 
 ```bash
 # Compliance-related files
-ls SOC2.md HIPAA.md GDPR.md compliance/ security/ .security/ 2>/dev/null
+ls SOC2.md HIPAA.md GDPR.md compliance/ security/ .security/ 2>/dev/null || true
 
 # PCI indicators (payment processing)
 grep -rniE "(stripe|payment|credit.?card|billing|checkout)" --include="*.ts" --include="*.js" --include="*.py" --include="*.go" -l
@@ -129,4 +129,4 @@ Present Stage 1 results as:
 - **Critical assets**: <list>
 ```
 
-Save output to `.claude/pasta-s1.json` for downstream stages.
+**You MUST use the Write tool to save the above structured output to `.claude/pasta-s1.json` before this stage is considered complete.** Create the `.claude/` directory first if needed. This file is required by downstream stages and for resume support.

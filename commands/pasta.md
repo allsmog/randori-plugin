@@ -34,7 +34,7 @@ Run the complete PASTA (Process for Attack Simulation and Threat Analysis) metho
 ## Step 1: Check for prior state
 
 ```bash
-ls .claude/randori-state.json 2>/dev/null
+ls .claude/randori-state.json 2>/dev/null || true
 ```
 
 If `--resume` and state exists, load it and skip completed stages.
@@ -44,7 +44,7 @@ If `--resume` and state exists, load it and skip completed stages.
 Quick language and framework detection:
 
 ```bash
-ls package.json pyproject.toml requirements.txt go.mod Cargo.toml pom.xml composer.json Gemfile 2>/dev/null
+ls package.json pyproject.toml requirements.txt go.mod Cargo.toml pom.xml composer.json Gemfile 2>/dev/null || true
 ```
 
 ```bash
@@ -53,26 +53,30 @@ find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.py" -o -name "*.java"
 
 ## Step 3: Execute stages sequentially
 
-Each stage feeds its output to the next:
+**CRITICAL: Write each stage output to disk IMMEDIATELY after completing it, BEFORE starting the next stage.** This ensures resume works and partial runs still produce usable artifacts. Do not batch writes at the end.
 
-### Stage 1: Define Objectives → `/randori:s1`
-- Gathers business requirements, security requirements, compliance context
-- Output feeds S2
+### Stage 1: Define Objectives
+- Gather business requirements, security requirements, compliance context
+- **IMMEDIATELY write** `.claude/pasta-s1.json` with the structured S1 output
+- Then proceed to Stage 2
 
-### Stage 2: Technical Scope → `/randori:s2`
-- Inventories components, actors, data sources/sinks, services
-- Output feeds S3
+### Stage 2: Technical Scope
+- Inventory components, actors, data sources/sinks, services
+- **IMMEDIATELY write** `.claude/pasta-s2.json` with the structured S2 output
+- Then proceed to Stage 3
 
-### Stage 3: Decomposition → `/randori:s3`
-- Builds DFD, trust boundaries, entry points, access control matrix
-- Generates Mermaid diagram
-- Output feeds S4
+### Stage 3: Decomposition
+- Build DFD, trust boundaries, entry points, access control matrix
+- **IMMEDIATELY write** `.claude/pasta-s3.json` with the structured S3 output
+- **IMMEDIATELY write** `.claude/dfd.mmd` with the Mermaid DFD diagram
+- Then proceed to Stage 4
 
-### Stage 4: Threat Analysis → `/randori:s4`
+### Stage 4: Threat Analysis
 - STRIDE classification of threats
 - ATT&CK technique mapping
 - 5-factor probabilistic assessment
 - Attack tree drafts
+- **IMMEDIATELY write** `.claude/pasta-s4.json` with the structured S4 output
 - This is the core of the threat model
 
 ### Stages 5-7 (Pro mode only)

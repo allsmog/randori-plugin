@@ -190,4 +190,4 @@ See `.claude/dfd.mmd` for the Mermaid diagram.
 | UC-003 | Admin user management | Admin | high — privilege operations |
 ```
 
-Save output to `.claude/pasta-s3.json` for downstream stages.
+**You MUST use the Write tool to save the above structured output to `.claude/pasta-s3.json` AND the Mermaid DFD to `.claude/dfd.mmd` before this stage is considered complete.** These files are required by downstream stages and for resume support.
