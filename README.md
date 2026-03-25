@@ -221,6 +221,34 @@ randori_api_key: your-api-key-here
 ---
 ```
 
+## E2E Verified
+
+Tested against an intentionally insecure Node.js fixture app (5 source files, ~200 lines):
+
+```
+$ /randori:pasta
+
+pasta-s1.json        65 lines   (business objectives, security requirements)
+pasta-s2.json       143 lines   (5 components, 4 actors, data sources/sinks)
+pasta-s3.json       139 lines   (trust boundaries, entry points, access control matrix)
+dfd.mmd              49 lines   (Mermaid data flow diagram)
+pasta-s4.json       409 lines   (19 threats, STRIDE + ATT&CK + probabilistic scoring)
+randori-state.json   31 lines   (run metadata)
+threat-model.md     200 lines   (full report with executive summary)
+
+Threats: 19 total
+  Critical: 8  (secret exfiltration, token forgery, broken authz, hardcoded keys)
+  High:     6  (password logging, no rate limiting, no TLS, stack traces)
+  Medium:   4  (no input validation, no session expiry)
+  Low:      1
+
+STRIDE: S:4 T:4 R:1 I:6 D:2 E:1
+Attack trees: 5
+Trust boundaries: 3
+```
+
+All threats include file:line evidence anchors and MITRE ATT&CK technique IDs.
+
 ## Limitations
 
 - Threat modeling quality depends on codebase size and structure. Small, well-organized codebases produce better results.
