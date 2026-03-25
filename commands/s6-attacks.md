@@ -17,7 +17,7 @@ Build complete attack trees, analyze the full attack surface, and simulate attac
 
 ## Pro Mode Required
 
-This stage requires a Randori API key. Check `.claude/randori.local.md` for configuration.
+This stage requires a Randori API key. Check `randori-output/randori.local.md` for configuration.
 
 If no API key is found, display:
 
@@ -31,7 +31,7 @@ Pro mode provides:
 - Simulated attack scenarios with step-by-step paths
 - ATT&CK kill chain mapping
 
-To enable Pro mode, add your API key to `.claude/randori.local.md`.
+To enable Pro mode, add your API key to `randori-output/randori.local.md`.
 ```
 
 ## What Pro Mode Provides
@@ -57,4 +57,4 @@ To enable Pro mode, add your API key to `.claude/randori.local.md`.
 
 ## Output
 
-Structured attack modeling saved to `.claude/pasta-s6.json`.
+Structured attack modeling saved to `randori-output/pasta-s6.json`.

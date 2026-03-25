@@ -129,4 +129,4 @@ Present Stage 1 results as:
 - **Critical assets**: <list>
 ```
 
-**You MUST save the above structured output to `.claude/pasta-s1.json` before this stage is considered complete.** Use `mkdir -p .claude && cat > .claude/pasta-s1.json << 'EOF'` via Bash. This file is required by downstream stages and for resume support.
+**You MUST save the above structured output to `randori-output/pasta-s1.json` before this stage is considered complete.** Use `mkdir -p randori-output && cat > randori-output/pasta-s1.json << 'EOF'` via Bash. This file is required by downstream stages and for resume support.

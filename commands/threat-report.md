@@ -24,14 +24,14 @@ Generate a consolidated threat model report from completed PASTA stages.
 Read all available stage outputs:
 
 ```bash
-ls .claude/pasta-s1.json .claude/pasta-s2.json .claude/pasta-s3.json .claude/pasta-s4.json .claude/pasta-s5.json .claude/pasta-s6.json .claude/pasta-s7.json 2>/dev/null || true
+ls randori-output/pasta-s1.json randori-output/pasta-s2.json randori-output/pasta-s3.json randori-output/pasta-s4.json randori-output/pasta-s5.json randori-output/pasta-s6.json randori-output/pasta-s7.json 2>/dev/null || true
 ```
 
 If no stage outputs exist, suggest running `/randori:pasta` first.
 
 ## Step 2: Generate report
 
-### Markdown report (`.claude/threat-model.md`)
+### Markdown report (`randori-output/threat-model.md`)
 
 ```markdown
 # PASTA Threat Model Report
@@ -100,7 +100,7 @@ If no stage outputs exist, suggest running `/randori:pasta` first.
 Full structured threat model as JSON matching `references/threat-model.schema.json`.
 
 ### Mermaid output
-Save DFD to `.claude/dfd.mmd` and attack trees to `.claude/attack-trees.mmd`.
+Save DFD to `randori-output/dfd.mmd` and attack trees to `randori-output/attack-trees.mmd`.
 
 ## Step 3: Display summary
 
@@ -120,6 +120,6 @@ Show a concise summary in the conversation:
 2. [HIGH] <threat title> — <one-line description>
 3. [HIGH] <threat title> — <one-line description>
 
-Full report: `.claude/threat-model.md`
-DFD diagram: `.claude/dfd.mmd`
+Full report: `randori-output/threat-model.md`
+DFD diagram: `randori-output/dfd.mmd`
 ```

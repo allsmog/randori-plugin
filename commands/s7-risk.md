@@ -17,7 +17,7 @@ Assess residual risk, define mitigation strategies, and produce prioritized reco
 
 ## Pro Mode Required
 
-This stage requires a Randori API key. Check `.claude/randori.local.md` for configuration.
+This stage requires a Randori API key. Check `randori-output/randori.local.md` for configuration.
 
 If no API key is found, display:
 
@@ -34,7 +34,7 @@ Pro mode provides:
 - Compliance-mapped recommendations (ISO 27001, SOC 2, NIST)
 - Executive summary for stakeholders
 
-To enable Pro mode, add your API key to `.claude/randori.local.md`.
+To enable Pro mode, add your API key to `randori-output/randori.local.md`.
 ```
 
 ## What Pro Mode Provides
@@ -63,5 +63,5 @@ To enable Pro mode, add your API key to `.claude/randori.local.md`.
 
 ## Output
 
-Structured risk management saved to `.claude/pasta-s7.json`.
+Structured risk management saved to `randori-output/pasta-s7.json`.
 Complete threat model report generated.

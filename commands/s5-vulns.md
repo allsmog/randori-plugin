@@ -16,7 +16,7 @@ Map threat scenarios to known vulnerabilities (CVE/CWE), identify weak patterns,
 
 ## Pro Mode Required
 
-This stage requires a Randori API key. Check `.claude/randori.local.md` for configuration.
+This stage requires a Randori API key. Check `randori-output/randori.local.md` for configuration.
 
 If no API key is found, display:
 
@@ -28,7 +28,7 @@ In community mode, you can:
 - Manually search for CVEs related to your dependencies
 - Use `/shinsa:compliance-scan` for code-level vulnerability assessment
 
-To enable Pro mode, add your API key to `.claude/randori.local.md`:
+To enable Pro mode, add your API key to `randori-output/randori.local.md`:
 ---
 randori_api_key: your-api-key-here
 ---
@@ -59,4 +59,4 @@ When API key is available, Stage 5 calls the Randori API to:
 
 ## Output
 
-Structured vulnerability analysis saved to `.claude/pasta-s5.json`.
+Structured vulnerability analysis saved to `randori-output/pasta-s5.json`.

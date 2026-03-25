@@ -16,7 +16,7 @@ Inventory all technical components, actors, data flows, and system services.
 
 ## Prerequisites
 
-Stage 1 must be completed. Check for `.claude/pasta-s1.json`.
+Stage 1 must be completed. Check for `randori-output/pasta-s1.json`.
 
 ## Process
 
@@ -146,4 +146,4 @@ Identify what's explicitly OUT of scope:
 - Third-party SaaS (Stripe, SendGrid)
 ```
 
-**You MUST save the above structured output to `.claude/pasta-s2.json` before this stage is considered complete.** Use `mkdir -p .claude && cat > .claude/pasta-s2.json << 'EOF'` via Bash. This file is required by downstream stages and for resume support.
+**You MUST save the above structured output to `randori-output/pasta-s2.json` before this stage is considered complete.** Use `mkdir -p randori-output && cat > randori-output/pasta-s2.json << 'EOF'` via Bash. This file is required by downstream stages and for resume support.

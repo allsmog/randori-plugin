@@ -13,12 +13,12 @@ On session start, check for existing threat model state and provide context.
 Check for existing threat model state:
 
 ```bash
-ls .claude/randori-state.json .claude/threat-model.md .claude/dfd.mmd 2>/dev/null || true
+ls randori-output/randori-state.json randori-output/threat-model.md randori-output/dfd.mmd 2>/dev/null || true
 ```
 
 ### If state file exists:
 
-Read `.claude/randori-state.json` and display:
+Read `randori-output/randori-state.json` and display:
 
 ```
 **Randori Threat Model Resumed**
@@ -73,7 +73,7 @@ Type `/randori:pasta` to begin a full threat model.
 Check for API key:
 
 ```bash
-cat .claude/randori.local.md 2>/dev/null | head -5
+cat randori-output/randori.local.md 2>/dev/null | head -5
 ```
 
 If the file contains `randori_api_key` in YAML frontmatter:

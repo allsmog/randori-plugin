@@ -72,6 +72,6 @@ Every threat scenario MUST include evidence anchors linking to specific code:
 
 ## State Files
 
-- `.claude/randori-state.json` — Machine-readable threat model state
-- `.claude/threat-model.md` — Human-readable threat model report
-- `.claude/dfd.mmd` — Mermaid DFD diagram
+- `randori-output/randori-state.json` — Machine-readable threat model state
+- `randori-output/threat-model.md` — Human-readable threat model report
+- `randori-output/dfd.mmd` — Mermaid DFD diagram

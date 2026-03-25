@@ -16,7 +16,7 @@ Build a data flow diagram (DFD), identify trust boundaries, enumerate entry poin
 
 ## Prerequisites
 
-Stages 1 and 2 must be completed. Check for `.claude/pasta-s2.json`.
+Stages 1 and 2 must be completed. Check for `randori-output/pasta-s2.json`.
 
 ## Process
 
@@ -99,7 +99,7 @@ For each trust boundary, assess:
 
 ### Step 6: Generate Mermaid DFD
 
-Write a Mermaid flowchart diagram to `.claude/dfd.mmd`:
+Write a Mermaid flowchart diagram to `randori-output/dfd.mmd`:
 
 ```mermaid
 graph LR
@@ -151,7 +151,7 @@ graph LR
 # PASTA Stage 3: Application Decomposition
 
 ## Data Flow Diagram
-See `.claude/dfd.mmd` for the Mermaid diagram.
+See `randori-output/dfd.mmd` for the Mermaid diagram.
 
 ## Trust Boundaries
 | ID | Name | Inner Zone | Outer Zone | Crossing Flows |
@@ -190,4 +190,4 @@ See `.claude/dfd.mmd` for the Mermaid diagram.
 | UC-003 | Admin user management | Admin | high — privilege operations |
 ```
 
-**You MUST save the above structured output to `.claude/pasta-s3.json` AND the Mermaid DFD to `.claude/dfd.mmd` before this stage is considered complete.** Use `mkdir -p .claude && cat > .claude/<file> << 'EOF'` via Bash for each file. These files are required by downstream stages and for resume support.
+**You MUST save the above structured output to `randori-output/pasta-s3.json` AND the Mermaid DFD to `randori-output/dfd.mmd` before this stage is considered complete.** Use `mkdir -p randori-output && cat > randori-output/<file> << 'EOF'` via Bash for each file. These files are required by downstream stages and for resume support.

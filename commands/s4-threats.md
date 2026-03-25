@@ -17,7 +17,7 @@ The core of the threat model. Identify threats using STRIDE, map to MITRE ATT&CK
 
 ## Prerequisites
 
-Stages 1-3 must be completed. Load `.claude/pasta-s3.json` (DFD, trust boundaries, entry points).
+Stages 1-3 must be completed. Load `randori-output/pasta-s3.json` (DFD, trust boundaries, entry points).
 
 ## Process
 
@@ -192,4 +192,4 @@ If no code evidence exists (e.g., architectural threat), describe the architectu
 | Insider | Data theft | High | User database, admin panel |
 ```
 
-**You MUST save the above structured output to `.claude/pasta-s4.json` before this stage is considered complete.** Use `mkdir -p .claude && cat > .claude/pasta-s4.json << 'EOF'` via Bash. This file is the core threat analysis output and is required for resume support and report generation.
+**You MUST save the above structured output to `randori-output/pasta-s4.json` before this stage is considered complete.** Use `mkdir -p randori-output && cat > randori-output/pasta-s4.json << 'EOF'` via Bash. This file is the core threat analysis output and is required for resume support and report generation.

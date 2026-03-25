@@ -29,19 +29,19 @@ Run the complete PASTA (Process for Attack Simulation and Threat Analysis) metho
 ## Available Stages
 
 **Community mode** (free): S1, S2, S3, S4
-**Pro mode** (requires API key in `.claude/randori.local.md`): S1-S7
+**Pro mode** (requires API key in `randori-output/randori.local.md`): S1-S7
 
 ## Step 1: Check for prior state and resume
 
 ```bash
-ls .claude/randori-state.json .claude/pasta-s1.json .claude/pasta-s2.json .claude/pasta-s3.json .claude/pasta-s4.json 2>/dev/null || true
+ls randori-output/randori-state.json randori-output/pasta-s1.json randori-output/pasta-s2.json randori-output/pasta-s3.json randori-output/pasta-s4.json 2>/dev/null || true
 ```
 
-**Resume logic**: If `--resume` is passed OR `.claude/randori-state.json` exists, read it and check `stages_completed`. Skip any stage whose output file already exists:
-- `.claude/pasta-s1.json` exists → skip S1
-- `.claude/pasta-s2.json` exists → skip S2
-- `.claude/pasta-s3.json` exists → skip S3
-- `.claude/pasta-s4.json` exists → skip S4
+**Resume logic**: If `--resume` is passed OR `randori-output/randori-state.json` exists, read it and check `stages_completed`. Skip any stage whose output file already exists:
+- `randori-output/pasta-s1.json` exists → skip S1
+- `randori-output/pasta-s2.json` exists → skip S2
+- `randori-output/pasta-s3.json` exists → skip S3
+- `randori-output/pasta-s4.json` exists → skip S4
 
 Start from the first missing stage. Read prior stage outputs from disk as input.
 
@@ -61,36 +61,36 @@ find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.py" -o -name "*.java"
 
 **CRITICAL: Write each stage output to disk IMMEDIATELY after completing it, BEFORE starting the next stage.** This ensures resume works and partial runs still produce usable artifacts. Do not batch writes at the end.
 
-**How to write**: Use `mkdir -p .claude && cat > .claude/<filename> << 'EOF'` via the Bash tool. This is more reliable than the Write tool for `.claude/` paths.
+**How to write**: Use `mkdir -p randori-output && cat > randori-output/<filename> << 'EOF'` via the Bash tool. This is more reliable than the Write tool for `randori-output/` paths.
 
-**After writing each stage file, also update `.claude/randori-state.json`** with the stage added to `stages_completed`.
+**After writing each stage file, also update `randori-output/randori-state.json`** with the stage added to `stages_completed`.
 
 ### Stage 1: Define Objectives
 - Gather business requirements, security requirements, compliance context
-- **IMMEDIATELY write** `.claude/pasta-s1.json`
-- **IMMEDIATELY update** `.claude/randori-state.json` with `stages_completed: ["s1"]`
+- **IMMEDIATELY write** `randori-output/pasta-s1.json`
+- **IMMEDIATELY update** `randori-output/randori-state.json` with `stages_completed: ["s1"]`
 
 ### Stage 2: Technical Scope
-- If resuming: read `.claude/pasta-s1.json` for S1 context
+- If resuming: read `randori-output/pasta-s1.json` for S1 context
 - Inventory components, actors, data sources/sinks, services
-- **IMMEDIATELY write** `.claude/pasta-s2.json`
-- **IMMEDIATELY update** `.claude/randori-state.json` with `stages_completed: ["s1","s2"]`
+- **IMMEDIATELY write** `randori-output/pasta-s2.json`
+- **IMMEDIATELY update** `randori-output/randori-state.json` with `stages_completed: ["s1","s2"]`
 
 ### Stage 3: Decomposition
-- If resuming: read `.claude/pasta-s2.json` for S2 context
+- If resuming: read `randori-output/pasta-s2.json` for S2 context
 - Build DFD, trust boundaries, entry points, access control matrix
-- **IMMEDIATELY write** `.claude/pasta-s3.json`
-- **IMMEDIATELY write** `.claude/dfd.mmd` with the Mermaid DFD diagram
-- **IMMEDIATELY update** `.claude/randori-state.json` with `stages_completed: ["s1","s2","s3"]`
+- **IMMEDIATELY write** `randori-output/pasta-s3.json`
+- **IMMEDIATELY write** `randori-output/dfd.mmd` with the Mermaid DFD diagram
+- **IMMEDIATELY update** `randori-output/randori-state.json` with `stages_completed: ["s1","s2","s3"]`
 
 ### Stage 4: Threat Analysis
-- **Read `.claude/pasta-s3.json` and `.claude/pasta-s1.json` from disk** as input context. Do NOT rely on in-memory state from prior stages.
+- **Read `randori-output/pasta-s3.json` and `randori-output/pasta-s1.json` from disk** as input context. Do NOT rely on in-memory state from prior stages.
 - STRIDE classification of threats
 - ATT&CK technique mapping
 - 5-factor probabilistic assessment
 - Attack tree drafts
-- **IMMEDIATELY write** `.claude/pasta-s4.json`
-- **IMMEDIATELY update** `.claude/randori-state.json` with `stages_completed: ["s1","s2","s3","s4"]` and full summary
+- **IMMEDIATELY write** `randori-output/pasta-s4.json`
+- **IMMEDIATELY update** `randori-output/randori-state.json` with `stages_completed: ["s1","s2","s3","s4"]` and full summary
 
 ### Stages 5-7 (Pro mode only)
 If API key detected, continue with:
@@ -100,7 +100,7 @@ If API key detected, continue with:
 
 ## Step 4: Write state file
 
-Write `.claude/randori-state.json`:
+Write `randori-output/randori-state.json`:
 
 ```json
 {
@@ -138,7 +138,7 @@ Write `.claude/randori-state.json`:
 
 ## Step 5: Generate report
 
-Write `.claude/threat-model.md` with the full threat model and display a summary.
+Write `randori-output/threat-model.md` with the full threat model and display a summary.
 
 ## Step 6: Emit requested format
 
@@ -149,7 +149,7 @@ Full structured threat model as JSON.
 Human-readable threat model report.
 
 ### `--format mermaid`
-DFD diagram saved to `.claude/dfd.mmd`.
+DFD diagram saved to `randori-output/dfd.mmd`.
 
 ## Notes
 
