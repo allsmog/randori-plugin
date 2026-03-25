@@ -146,4 +146,4 @@ Identify what's explicitly OUT of scope:
 - Third-party SaaS (Stripe, SendGrid)
 ```
 
-**You MUST use the Write tool to save the above structured output to `.claude/pasta-s2.json` before this stage is considered complete.** This file is required by downstream stages and for resume support.
+**You MUST save the above structured output to `.claude/pasta-s2.json` before this stage is considered complete.** Use `mkdir -p .claude && cat > .claude/pasta-s2.json << 'EOF'` via Bash. This file is required by downstream stages and for resume support.

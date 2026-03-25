@@ -55,6 +55,8 @@ find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.py" -o -name "*.java"
 
 **CRITICAL: Write each stage output to disk IMMEDIATELY after completing it, BEFORE starting the next stage.** This ensures resume works and partial runs still produce usable artifacts. Do not batch writes at the end.
 
+**How to write**: Use `mkdir -p .claude && cat > .claude/<filename> << 'EOF'` via the Bash tool. This is more reliable than the Write tool for `.claude/` paths.
+
 ### Stage 1: Define Objectives
 - Gather business requirements, security requirements, compliance context
 - **IMMEDIATELY write** `.claude/pasta-s1.json` with the structured S1 output
