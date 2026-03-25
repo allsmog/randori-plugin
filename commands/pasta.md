@@ -31,15 +31,21 @@ Run the complete PASTA (Process for Attack Simulation and Threat Analysis) metho
 **Community mode** (free): S1, S2, S3, S4
 **Pro mode** (requires API key in `.claude/randori.local.md`): S1-S7
 
-## Step 1: Check for prior state
+## Step 1: Check for prior state and resume
 
 ```bash
-ls .claude/randori-state.json 2>/dev/null || true
+ls .claude/randori-state.json .claude/pasta-s1.json .claude/pasta-s2.json .claude/pasta-s3.json .claude/pasta-s4.json 2>/dev/null || true
 ```
 
-If `--resume` and state exists, load it and skip completed stages.
+**Resume logic**: If `--resume` is passed OR `.claude/randori-state.json` exists, read it and check `stages_completed`. Skip any stage whose output file already exists:
+- `.claude/pasta-s1.json` exists → skip S1
+- `.claude/pasta-s2.json` exists → skip S2
+- `.claude/pasta-s3.json` exists → skip S3
+- `.claude/pasta-s4.json` exists → skip S4
 
-## Step 2: Scope the codebase
+Start from the first missing stage. Read prior stage outputs from disk as input.
+
+## Step 2: Scope the codebase (skip if resuming past S2)
 
 Quick language and framework detection:
 
@@ -57,29 +63,34 @@ find . -type f \( -name "*.ts" -o -name "*.js" -o -name "*.py" -o -name "*.java"
 
 **How to write**: Use `mkdir -p .claude && cat > .claude/<filename> << 'EOF'` via the Bash tool. This is more reliable than the Write tool for `.claude/` paths.
 
+**After writing each stage file, also update `.claude/randori-state.json`** with the stage added to `stages_completed`.
+
 ### Stage 1: Define Objectives
 - Gather business requirements, security requirements, compliance context
-- **IMMEDIATELY write** `.claude/pasta-s1.json` with the structured S1 output
-- Then proceed to Stage 2
+- **IMMEDIATELY write** `.claude/pasta-s1.json`
+- **IMMEDIATELY update** `.claude/randori-state.json` with `stages_completed: ["s1"]`
 
 ### Stage 2: Technical Scope
+- If resuming: read `.claude/pasta-s1.json` for S1 context
 - Inventory components, actors, data sources/sinks, services
-- **IMMEDIATELY write** `.claude/pasta-s2.json` with the structured S2 output
-- Then proceed to Stage 3
+- **IMMEDIATELY write** `.claude/pasta-s2.json`
+- **IMMEDIATELY update** `.claude/randori-state.json` with `stages_completed: ["s1","s2"]`
 
 ### Stage 3: Decomposition
+- If resuming: read `.claude/pasta-s2.json` for S2 context
 - Build DFD, trust boundaries, entry points, access control matrix
-- **IMMEDIATELY write** `.claude/pasta-s3.json` with the structured S3 output
+- **IMMEDIATELY write** `.claude/pasta-s3.json`
 - **IMMEDIATELY write** `.claude/dfd.mmd` with the Mermaid DFD diagram
-- Then proceed to Stage 4
+- **IMMEDIATELY update** `.claude/randori-state.json` with `stages_completed: ["s1","s2","s3"]`
 
 ### Stage 4: Threat Analysis
+- **Read `.claude/pasta-s3.json` and `.claude/pasta-s1.json` from disk** as input context. Do NOT rely on in-memory state from prior stages.
 - STRIDE classification of threats
 - ATT&CK technique mapping
 - 5-factor probabilistic assessment
 - Attack tree drafts
-- **IMMEDIATELY write** `.claude/pasta-s4.json` with the structured S4 output
-- This is the core of the threat model
+- **IMMEDIATELY write** `.claude/pasta-s4.json`
+- **IMMEDIATELY update** `.claude/randori-state.json` with `stages_completed: ["s1","s2","s3","s4"]` and full summary
 
 ### Stages 5-7 (Pro mode only)
 If API key detected, continue with:
