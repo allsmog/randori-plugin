@@ -1,0 +1,10 @@
+{
+  "id": "randori",
+  "displayName": "Randori PASTA Threat Modeling",
+  "version": "1.0.0",
+  "description": "7-stage PASTA threat modeling with STRIDE classification, ATT&CK mapping, DFD generation, and evidence-anchored risk assessment.",
+  "category": "intel",
+  "entry": "./kuzushi-module.js",
+  "author": "allsmog",
+  "license": "MIT"
+}
