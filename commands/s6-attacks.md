@@ -15,6 +15,10 @@ allowed-tools:
 
 Build complete attack trees, analyze the full attack surface, and simulate attack scenarios.
 
+> **Tool argument schema (CRITICAL):** When you invoke the `Write` tool, use
+> `file_path` + `content` (snake_case), not `filePath`/`text`. Same for
+> `Edit` and `Read`. camelCase belongs only inside the JSON payload.
+
 ## Pro Mode Required
 
 This stage requires a Randori API key. Check `randori-output/randori.local.md` for configuration.

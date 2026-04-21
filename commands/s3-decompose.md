@@ -14,6 +14,12 @@ allowed-tools:
 
 Build a data flow diagram (DFD), identify trust boundaries, enumerate entry points, and construct an access control matrix.
 
+> **Tool argument schema (CRITICAL):** When you invoke the `Write` tool, the
+> argument names are `file_path` and `content` — **snake_case**, never
+> `filePath`/`text`. Same rule for `Edit` (`file_path`, `old_string`,
+> `new_string`) and `Read` (`file_path`, `offset`, `limit`). Use camelCase
+> only inside the JSON payload you write to disk — not in tool arguments.
+
 ## Prerequisites
 
 Stages 1 and 2 must be completed. Check for `randori-output/pasta-s2.json`.

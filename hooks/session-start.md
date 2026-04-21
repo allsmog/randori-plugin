@@ -8,6 +8,20 @@ event: SessionStart
 
 On session start, check for existing threat model state and provide context.
 
+## Tool invocation reminder
+
+**CRITICAL — Applies to every stage in this plugin.** When you invoke
+Claude Code's built-in file tools, use the snake_case argument schema:
+
+- `Write`: `{ file_path, content }` — NOT `{ filePath, text }`
+- `Edit`: `{ file_path, old_string, new_string, replace_all? }`
+- `Read`: `{ file_path, offset?, limit? }`
+
+The threat-model JSON output you write to disk uses camelCase
+(`filePath`, `startLine`) for evidence anchors — that's unrelated to
+tool invocation arguments. Mixing the two formats triggers validation
+errors that retry-loop the sub-agent for minutes.
+
 ## State Detection
 
 Check for existing threat model state:

@@ -12,6 +12,11 @@ allowed-tools:
 
 Generate a consolidated threat model report from completed PASTA stages.
 
+> **Tool argument schema (CRITICAL):** When you invoke the `Write` tool, use
+> `file_path` + `content` (snake_case), not `filePath`/`text`. Report
+> content may contain camelCase fields — that's unrelated to tool
+> invocation arguments.
+
 ## Flags
 
 | Flag | Effect |

@@ -17,6 +17,14 @@ allowed-tools:
 
 Run the complete PASTA (Process for Attack Simulation and Threat Analysis) methodology against a codebase.
 
+> **Tool argument schema (CRITICAL):** When you invoke the `Write` tool, use
+> `file_path` + `content` (snake_case), not `filePath`/`text`. Same for
+> `Edit` (`file_path`, `old_string`, `new_string`) and `Read`
+> (`file_path`, `offset`, `limit`). The threat-model JSON you write to
+> disk uses camelCase (`filePath`, `startLine`) for evidence anchors —
+> that's unrelated to tool invocation arguments. Mixing them triggers
+> validation errors that retry-loop the sub-agent for minutes.
+
 ## Flags
 
 | Flag | Effect |

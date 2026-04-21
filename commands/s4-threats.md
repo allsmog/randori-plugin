@@ -15,6 +15,15 @@ allowed-tools:
 
 The core of the threat model. Identify threats using STRIDE, map to MITRE ATT&CK and CAPEC, assess probability using the VerSprite 5-factor model, and draft attack trees.
 
+> **Tool argument schema (CRITICAL):** When you invoke the `Write` tool, the
+> argument names are `file_path` and `content` — **snake_case**, never
+> `filePath`/`text`. The threat-model output JSON uses camelCase
+> (`filePath`, `startLine`) as the *content* schema, but that is unrelated
+> to tool invocation arguments. Mixing the two triggers validation errors
+> that cause the sub-agent to retry the same bad call in a tight loop.
+> Same rule applies to `Edit` (`file_path`, `old_string`, `new_string`)
+> and `Read` (`file_path`, `offset`, `limit`).
+
 ## Prerequisites
 
 Stages 1-3 must be completed. Load `randori-output/pasta-s3.json` (DFD, trust boundaries, entry points).
